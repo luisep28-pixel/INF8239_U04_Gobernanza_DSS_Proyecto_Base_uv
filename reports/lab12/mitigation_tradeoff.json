@@ -1,0 +1,35 @@
+{
+  "analysis": "Trade-off entre Rendimiento Global y Equidad Subgrupal",
+  "accuracy_delta": 0.012499999999999956,
+  "recall_G1_delta": 0.24489795918367352,
+  "recall_gap_delta": -0.007119126720455671,
+  "fpr_gap_delta": 0.08653846153846156,
+  "baseline": {
+    "version": "Baseline (Logistic)",
+    "accuracy": 0.719,
+    "recall_overall": 0.717,
+    "precision_overall": 0.776,
+    "recall_G1": 0.653,
+    "recall_G2": 0.791,
+    "recall_gap": 0.138,
+    "fpr_gap": 0.125,
+    "selection_rate_gap": 0.232,
+    "gate_min_recall": true,
+    "gate_recall_gap": true,
+    "gate_fpr_gap": true
+  },
+  "mitigated": {
+    "version": "Mitigated (ThresholdOptimizer - EqOdds)",
+    "accuracy": 0.731,
+    "recall_overall": 0.837,
+    "precision_overall": 0.733,
+    "recall_G1": 0.898,
+    "recall_G2": 0.767,
+    "recall_gap": 0.131,
+    "fpr_gap": 0.212,
+    "selection_rate_gap": 0.046,
+    "gate_min_recall": true,
+    "gate_recall_gap": true,
+    "gate_fpr_gap": false
+  }
+}

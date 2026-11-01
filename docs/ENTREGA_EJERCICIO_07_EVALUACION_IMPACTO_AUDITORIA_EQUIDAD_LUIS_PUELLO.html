@@ -1,0 +1,627 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Entrega Ejercicio 07 · Evaluación de Impacto y Auditoría de Equidad · INF-8239</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --primary-accent: #1e40af;
+      --secondary-accent: #3b82f6;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --bg-header: #f8fafc;
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+      
+      /* Badges */
+      --pass-bg: #dcfce7; --pass-text: #15803d;
+      --warn-bg: #fef3c7; --warn-text: #b45309;
+      --fail-bg: #fee2e2; --fail-text: #b91c1c;
+      --info-bg: #e0e7ff; --info-text: #3730a3;
+    }
+
+    @page { size: letter; margin: 16mm 14mm; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      line-height: 1.55;
+      font-size: 13px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      background-color: #ffffff;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border-bottom: 3px solid var(--primary-accent);
+      padding-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .header-meta {
+      background: var(--bg-header);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--primary-accent);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+    .header-meta strong { color: var(--primary); }
+
+    h2 {
+      color: var(--primary-accent);
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    th, td {
+      border: 1px solid var(--border-light);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #1e293b;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    tr:nth-child(even) { background: #f8fafc; }
+    tr:hover { background: #f1f5f9; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .badge-pass { background: var(--pass-bg); color: var(--pass-text); }
+    .badge-warn { background: var(--warn-bg); color: var(--warn-text); }
+    .badge-fail { background: var(--fail-bg); color: var(--fail-text); }
+    .badge-blue { background: var(--info-bg); color: var(--info-text); }
+
+    .callout {
+      border-left: 4px solid var(--secondary-accent);
+      background: #f0f9ff;
+      color: #0c4a6e;
+      padding: 12px 16px;
+      margin: 14px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 12.5px;
+    }
+
+    .callout-verdict {
+      border-left: 5px solid #d97706;
+      background: #fffbeb;
+      border-top: 1px solid #fef3c7;
+      border-right: 1px solid #fef3c7;
+      border-bottom: 1px solid #fef3c7;
+      padding: 14px 16px;
+      margin: 18px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    ul, ol {
+      margin: 6px 0 12px 20px;
+      padding: 0;
+    }
+
+    li { margin-bottom: 4px; }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: #0f172a;
+    }
+
+    .page-break { page-break-before: always; }
+
+    @media print {
+      body { padding: 0; }
+      .no-print { display: none; }
+      th { background: #1e293b !important; color: #ffffff !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>INF-8239 · Ejercicio 07: Evaluación de Impacto y Auditoría de Equidad</h1>
+
+  <div class="header-meta">
+    <strong>Universidad:</strong> Universidad Autónoma de Santo Domingo (UASD) — Facultad de Ciencias<br>
+    <strong>Maestría:</strong> Maestría en Inteligencia Artificial | <strong>Asignatura:</strong> INF-8239 Ciencia de Datos II<br>
+    <strong>Repositorio GitHub:</strong> <a href="https://github.com/luisep28-pixel/INF8239_U04_Gobernanza_DSS_Proyecto_Base_uv" target="_blank" style="color: #1e40af; text-decoration: none; font-weight: 600;"><code>https://github.com/luisep28-pixel/INF8239_U04_Gobernanza_DSS_Proyecto_Base_uv</code></a><br>
+    <strong>Entorno:</strong> Python 3.12 · <code>uv</code> · Fairlearn · Scikit-Learn · Pytest (10/10 pruebas aprobadas)
+  </div>
+
+  <h2>1. Finalidad, Interesados y Proporcionalidad (0.75 pts)</h2>
+  
+  <h3>1.1. Propósito del Sistema y Justificación Proporcional</h3>
+  <p>
+    El sistema desarrollado es un <strong>Decision Support System (DSS)</strong> diseñado para priorizar inspecciones territoriales preventivas ante riesgos de infraestructura y ambientales. Su función es estrictamente <strong>indicativa y de asistencia</strong> técnica para optimizar rutas de visita presencial, operando bajo un esquema innegociable de <strong>Human-in-the-Loop</strong>. El sistema tiene terminantemente prohibido ejecutar actos administrativos automáticos, sanciones o denegación de servicios esenciales.
+  </p>
+  <ul>
+    <li><strong>Alternativa no predictiva:</strong> Asignación por orden cronológico estricto de denuncias (FIFO) combinada con muestreo territorial estratificado por historial de denuncias.</li>
+    <li><strong>Condición de desconexión / revocación:</strong> Disparidad de Recall entre grupos (<code>recall_gap</code>) &gt; 0.16, brecha de falsos positivos (<code>fpr_gap</code>) &gt; 0.16, o degradación del Recall global por debajo de 0.68.</li>
+    <li><strong>Mecanismo de apelación ciudadana:</strong> Canal administrativo formal con derecho a revisión humana colegiada presencial en un plazo perentorio de 10 días hábiles.</li>
+  </ul>
+
+  <h3>1.2. Mapeo de Partes Interesadas y Distinción Tripartita Obligatoria</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Parte Interesada (Stakeholder)</th>
+        <th>Beneficio Esperado</th>
+        <th>Daño Potencial</th>
+        <th>Poder</th>
+        <th>Obligación Legal / Marco Voluntario / Ética</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Persona Afectada</strong><br>(Ciudadanos / Residentes)</td>
+        <td>Atención oportuna ante amenazas estructurales latentes.</td>
+        <td>Falso negativo (desatención) o falso positivo (estigmatización).</td>
+        <td><span class="badge badge-warn">Bajo</span></td>
+        <td>
+          <strong>Obligación Legal:</strong> Ley No. 172-13 (Protección de datos y prohibición de decisiones exclusivamente automatizadas) y Ley 107-13 (Debido proceso administrativo y apelación).<br>
+          <strong>Ética:</strong> Principio UNESCO de No Discriminación y Justicia Distributiva.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Operador Técnico</strong><br>(Inspectores de campo)</td>
+        <td>Optimización de rutas de visita y asistencia técnica objetiva.</td>
+        <td>Sesgo de automatización (automation bias) y fatiga de alertas.</td>
+        <td><span class="badge badge-blue">Medio</span></td>
+        <td>
+          <strong>Marco Voluntario:</strong> NIST AI RMF 1.0 (Función <em>MANAGE</em> — protocolos de supervisión y anulación manual obligatoria).
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Dueño Institucional</strong><br>(Dirección de Riesgo)</td>
+        <td>Asignación eficiente y auditable de recursos públicos.</td>
+        <td>Responsabilidad legal por discriminación y daño reputacional.</td>
+        <td><span class="badge badge-pass">Alto</span></td>
+        <td>
+          <strong>Obligación Legal:</strong> Rendición de cuentas de la administración pública y motivación de actos.<br>
+          <strong>Marco Voluntario:</strong> NIST AI RMF 1.0 (Función <em>GOVERN</em> — políticas de calidad institucional).
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Equipo de Datos</strong><br>(Data Scientists / ML Eng)</td>
+        <td>Pipeline reproducible con monitoreo continuo de sesgo.</td>
+        <td>Sesgo muestral inadvertido y deriva de datos en producción.</td>
+        <td><span class="badge badge-blue">Medio</span></td>
+        <td>
+          <strong>Marco Voluntario:</strong> NIST AI RMF (Función <em>MEASURE</em> con Fairlearn).<br>
+          <strong>Recomendación Ética:</strong> Principios de Green AI (modelos compactos, bajo consumo energético y latencia &lt; 500 ms).
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. Registro de Riesgos y Mapeo NIST AI RMF (1.00 pt)</h2>
+  <p>
+    Se documentaron y ponderaron 8 riesgos representativos en <code>student_inputs/risk_register.csv</code>, mapeados a las cuatro funciones del marco <strong>NIST AI RMF 1.0</strong>:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Función NIST</th>
+        <th>Escenario de Riesgo</th>
+        <th>Prob. (1-4)</th>
+        <th>Imp. (1-4)</th>
+        <th>Ponderación</th>
+        <th>Control Implementado</th>
+        <th>Residual</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>R02</strong></td>
+        <td><span class="badge badge-blue">MAP</span></td>
+        <td>Subregistro y desatención de incidentes críticos en subgrupos vulnerables (G1).</td>
+        <td>3</td>
+        <td>3</td>
+        <td><strong>9 (Crítico)</strong></td>
+        <td>Compuerta obligatoria de Recall mínimo (min_recall &ge; 0.68) y mapeo contextual.</td>
+        <td><span class="badge badge-warn">Medio</span></td>
+      </tr>
+      <tr>
+        <td><strong>R01</strong></td>
+        <td><span class="badge badge-blue">GOVERN</span></td>
+        <td>Automatización no autorizada de decisiones punitivas sin supervisión humana.</td>
+        <td>2</td>
+        <td>4</td>
+        <td><strong>8 (Alto)</strong></td>
+        <td>Protocolo Human-in-the-Loop y restricción por código en governance.yml.</td>
+        <td><span class="badge badge-warn">Medio</span></td>
+      </tr>
+      <tr>
+        <td><strong>R07</strong></td>
+        <td><span class="badge badge-blue">MEASURE</span></td>
+        <td>Latencia excesiva o huella de carbono computacional elevada.</td>
+        <td>2</td>
+        <td>4</td>
+        <td><strong>8 (Alto)</strong></td>
+        <td>Compuertas Green AI: max_latency_ms &le; 500 ms, tamaño &le; 1024 KB.</td>
+        <td><span class="badge badge-pass">Bajo</span></td>
+      </tr>
+      <tr>
+        <td><strong>R03</strong></td>
+        <td><span class="badge badge-blue">MEASURE</span></td>
+        <td>Disparidad en tasas de falsos positivos y recall entre subgrupos (sesgo algorítmico).</td>
+        <td>2</td>
+        <td>3</td>
+        <td><strong>6 (Medio)</strong></td>
+        <td>Auditoría algorítmica con Fairlearn y mitigación con ThresholdOptimizer.</td>
+        <td><span class="badge badge-warn">Medio</span></td>
+      </tr>
+      <tr>
+        <td><strong>R06</strong></td>
+        <td><span class="badge badge-blue">MAP</span></td>
+        <td>Sesgo de automatización por sobreconfianza del inspector técnico.</td>
+        <td>3</td>
+        <td>2</td>
+        <td><strong>6 (Medio)</strong></td>
+        <td>Capacitación técnica, interfaz explicable y registro de anulación manual.</td>
+        <td><span class="badge badge-pass">Bajo</span></td>
+      </tr>
+      <tr>
+        <td><strong>R04</strong></td>
+        <td><span class="badge badge-blue">MANAGE</span></td>
+        <td>Deriva de datos (data drift) y obsolescencia del modelo sin contingencia.</td>
+        <td>1</td>
+        <td>4</td>
+        <td><strong>4 (Moderado)</strong></td>
+        <td>Runbook de incidentes con rollback inmediato a línea base heurística (FIFO).</td>
+        <td><span class="badge badge-pass">Bajo</span></td>
+      </tr>
+      <tr>
+        <td><strong>R05</strong></td>
+        <td><span class="badge badge-blue">GOVERN</span></td>
+        <td>Exposición involuntaria de datos personales directos (PII).</td>
+        <td>2</td>
+        <td>2</td>
+        <td><strong>4 (Moderado)</strong></td>
+        <td>Contrato de datos en pipeline y pruebas automáticas test_privacy en CI/CD.</td>
+        <td><span class="badge badge-pass">Bajo</span></td>
+      </tr>
+      <tr>
+        <td><strong>R08</strong></td>
+        <td><span class="badge badge-blue">MANAGE</span></td>
+        <td>Falta de respuesta oportuna o denegación no motivada de apelaciones.</td>
+        <td>1</td>
+        <td>3</td>
+        <td><strong>3 (Bajo)</strong></td>
+        <td>Canal formal con plazo perentorio de 10 días hábiles bajo la Ley 107-13.</td>
+        <td><span class="badge badge-pass">Bajo</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>3. Auditoría Global, por Subgrupo e Interseccional con Fairlearn (1.25 pts)</h2>
+  
+  <h3>3.1. Evaluación Global y por Subgrupo Protegido (Modelo Base Logístico)</h3>
+  <p>
+    Se evaluó el conjunto de prueba temporal (160 registros independientes) mediante <code>inf8239_u04.fairness.audit</code>.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Grupo / Nivel</th>
+        <th>Casos (n)</th>
+        <th>Accuracy</th>
+        <th>Selection Rate</th>
+        <th>Recall (TPR)</th>
+        <th>Precision</th>
+        <th>FPR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Global</strong></td>
+        <td>160</td>
+        <td>0.719</td>
+        <td>0.531</td>
+        <td>0.717</td>
+        <td>0.776</td>
+        <td>0.279</td>
+      </tr>
+      <tr>
+        <td><strong>Subgrupo G1</strong></td>
+        <td>101</td>
+        <td>0.703</td>
+        <td>0.446</td>
+        <td><strong>0.653</strong> <span class="badge badge-fail">Incumple min &ge; 0.68</span></td>
+        <td>0.711</td>
+        <td>0.250</td>
+      </tr>
+      <tr>
+        <td><strong>Subgrupo G2</strong></td>
+        <td>59</td>
+        <td>0.746</td>
+        <td>0.678</td>
+        <td><strong>0.791</strong></td>
+        <td>0.850</td>
+        <td>0.375</td>
+      </tr>
+      <tr>
+        <td><strong>Brecha (|G1 - G2|)</strong></td>
+        <td>-</td>
+        <td>0.043</td>
+        <td><strong>0.232</strong> (Disparidad severa)</td>
+        <td>0.138</td>
+        <td>0.139</td>
+        <td>0.125</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.2. Hallazgos Críticos de la Auditoría Interseccional (<code>protected_group</code> &times; <code>age_band</code>)</h3>
+  <p>
+    Al cruzar el grupo protegido con la franja etaria, el análisis interseccional expuso disparidades ocultas que el promedio global enmascaraba:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Estrato Interseccional</th>
+        <th>Casos</th>
+        <th>Accuracy</th>
+        <th>Selection Rate</th>
+        <th>Recall</th>
+        <th>FPR</th>
+        <th>Diagnóstico de Equidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>G1 | 18-29</strong></td>
+        <td>18</td>
+        <td>0.833</td>
+        <td>0.278</td>
+        <td>0.750</td>
+        <td>0.143</td>
+        <td>Tasa de selección sumamente baja (sub-priorización inicial).</td>
+      </tr>
+      <tr>
+        <td><strong>G1 | 30-44</strong></td>
+        <td>24</td>
+        <td>0.667</td>
+        <td>0.417</td>
+        <td><strong>0.562</strong></td>
+        <td>0.125</td>
+        <td><span class="badge badge-fail">Vulnerabilidad Crítica</span> 43.8% de riesgos reales quedan desatendidos.</td>
+      </tr>
+      <tr>
+        <td><strong>G1 | 45-59</strong></td>
+        <td>35</td>
+        <td>0.600</td>
+        <td>0.486</td>
+        <td>0.588</td>
+        <td>0.389</td>
+        <td>Baja exactitud y Recall por debajo del 60%.</td>
+      </tr>
+      <tr>
+        <td><strong>G1 | 60+</strong></td>
+        <td>24</td>
+        <td>0.792</td>
+        <td>0.542</td>
+        <td>0.833</td>
+        <td>0.250</td>
+        <td>Desempeño equilibrado dentro de G1.</td>
+      </tr>
+      <tr>
+        <td><strong>G2 | 18-29</strong></td>
+        <td>11</td>
+        <td>0.909</td>
+        <td>0.636</td>
+        <td>0.875</td>
+        <td>0.000</td>
+        <td>Excelente precisión sin falsas alarmas.</td>
+      </tr>
+      <tr>
+        <td><strong>G2 | 45-59</strong></td>
+        <td>8</td>
+        <td>1.000</td>
+        <td>0.750</td>
+        <td>1.000</td>
+        <td>0.000</td>
+        <td>Detección perfecta (100% Recall, 0% FPR).</td>
+      </tr>
+      <tr>
+        <td><strong>G2 | 60+</strong></td>
+        <td>26</td>
+        <td>0.654</td>
+        <td>0.692</td>
+        <td>0.765</td>
+        <td><strong>0.556</strong></td>
+        <td><span class="badge badge-warn">Sobrealerta</span> Más de la mitad de los casos normales generan falsa alarma.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Mitigación, Trade-offs y Dictamen de Decisión (1.25 pts)</h2>
+  
+  <h3>4.1. Aplicación de Mitigación con Fairlearn (<code>ThresholdOptimizer</code>)</h3>
+  <p>
+    Se implementó un post-procesamiento mediante <code>ThresholdOptimizer</code> con la restricción de <strong>Equalized Odds</strong> (calibración de umbrales específicos por subgrupo sensible).
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Métrica / Dimensión</th>
+        <th>Modelo Base (Logistic)</th>
+        <th>Modelo Mitigado (ThresholdOptimizer)</th>
+        <th>Impacto del Trade-off</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Accuracy Global</strong></td>
+        <td>0.719</td>
+        <td><strong>0.731</strong></td>
+        <td><span class="badge badge-pass">+1.2%</span> Mejora leve de exactitud general.</td>
+      </tr>
+      <tr>
+        <td><strong>Recall Global</strong></td>
+        <td>0.717</td>
+        <td><strong>0.837</strong></td>
+        <td><span class="badge badge-pass">+12.0%</span> Detección global significativamente superior.</td>
+      </tr>
+      <tr>
+        <td><strong>Recall en Subgrupo G1</strong></td>
+        <td>0.653 (Falla compuerta)</td>
+        <td><strong>0.898</strong></td>
+        <td><span class="badge badge-pass">+24.5%</span> Supera ampliamente la compuerta mínima (0.68).</td>
+      </tr>
+      <tr>
+        <td><strong>Brecha de Selección Demográfica</strong></td>
+        <td>0.232 (23.2%)</td>
+        <td><strong>0.046</strong> (4.6%)</td>
+        <td><span class="badge badge-pass">-18.6%</span> Paridad de selección demográfica casi total.</td>
+      </tr>
+      <tr>
+        <td><strong>FPR en Subgrupo G1</strong></td>
+        <td>0.250</td>
+        <td><strong>0.462</strong></td>
+        <td><span class="badge badge-warn">Costo del Trade-off</span> Aumento de falsas alarmas en G1.</td>
+      </tr>
+      <tr>
+        <td><strong>Brecha de FPR (fpr_gap)</strong></td>
+        <td>0.125 (Cumple &le; 0.16)</td>
+        <td><strong>0.212</strong> (Excede compuerta 0.16)</td>
+        <td><span class="badge badge-warn">Compuerta violada</span> Requiere supervisión humana obligatoria.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout-verdict">
+    <h3 style="margin-top:0; color:#b45309;">Dictamen de Gobernanza Institucional: LIMITAR</h3>
+    <p>
+      <strong>Justificación formal:</strong> No es posible autorizar un despliegue libre autónomo (<code>GO</code> directo) debido a que la mitigación, si bien resuelve la desatención del grupo vulnerable G1 (llevando el Recall a 89.8%), genera como efecto colateral un incremento en la tasa de falsas alarmas (FPR = 46.2% y <code>fpr_gap = 0.212</code>).
+    </p>
+    <p>
+      Por tanto, se emite el dictamen formal de <strong>LIMITAR</strong>:
+    </p>
+    <ol>
+      <li><strong>Asistencia técnica exclusiva:</strong> El modelo se utilizará únicamente como herramienta de ordenación y priorización indicativa de inspecciones; el inspector técnico humano debe revisar los fundamentos de cada caso antes de visitar el territorio.</li>
+      <li><strong>Prohibición de actos automáticos:</strong> Queda terminantemente prohibida la toma de decisiones administrativas, sanción o desestimación automática sin validación ocular presencial.</li>
+      <li><strong>Muestreo de control de falsos negativos:</strong> Se establece un protocolo de auditoría aleatoria sobre el 20% de los casos catalogados como "no prioritarios", garantizando que ningún estrato quede inadvertidamente desprotegido.</li>
+      <li><strong>Vigencia de apelación:</strong> Disponibilidad inmediata de canal de reclamación ciudadana con resolución en 10 días bajo la Ley No. 107-13.</li>
+    </ol>
+  </div>
+
+  <h2>5. Pruebas Unitarias, Referencias y Declaración de IA (0.75 pts)</h2>
+  
+  <h3>5.1. Resultados de la Suite de Pruebas Unitarias (<code>pytest</code>)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Archivo de Prueba</th>
+        <th>Cobertura Funcional</th>
+        <th>Resultado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>tests/test_data.py</code></td>
+        <td>Contrato de esquema de datos, volumen mínimo y unicidad de identificador.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_privacy.py</code></td>
+        <td>Bloqueo automático de PII directa (cédula, nombre, teléfono, correo).</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_impact.py</code></td>
+        <td>Ponderación matemática de riesgos ($P = L \times I$) y rechazo de placeholders.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_fairness.py</code></td>
+        <td>Límites acotados de brechas de equidad y existencia de subgrupos protegidos.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_governance.py</code></td>
+        <td>Compuertas de despliegue, transición a <code>REVIEW</code> y matriz RACI.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_model.py</code></td>
+        <td>Predicciones binarias admisibles $\{0, 1\}$ del estimador.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+      <tr>
+        <td><code>tests/test_app.py</code></td>
+        <td>Arranque de Streamlit y divulgación explícita de caso didáctico/sintético.</td>
+        <td><span class="badge badge-pass">PASSED</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Resultado global:</strong> <code>10 passed in 4.63s (100% de éxito)</code>.</p>
+
+  <h3>5.2. Marco Normativo y Referencias Técnicas</h3>
+  <ul>
+    <li><strong>Ley No. 172-13:</strong> Sobre la Protección Integral de los Datos Personales asentados en archivos, registros públicos y privados (República Dominicana).</li>
+    <li><strong>Ley No. 107-13:</strong> Sobre los Derechos de las Personas en sus Relaciones con la Administración y de Procedimiento Administrativo (República Dominicana).</li>
+    <li><strong>NIST AI RMF 1.0 (2023):</strong> Artificial Intelligence Risk Management Framework, National Institute of Standards and Technology.</li>
+    <li><strong>Fairlearn Toolkit:</strong> Weerts, H., Dudík, M., Edgar, R., et al. (2023). <em>Fairlearn: Assessing and Improving Fairness of AI Systems</em>.</li>
+    <li><strong>UNESCO (2021):</strong> <em>Recomendación sobre la Ética de la Inteligencia Artificial</em>. Conferencia General de la UNESCO.</li>
+    <li><strong>Green AI (2019):</strong> Schwartz, R., Dodge, J., Smith, N. A., & Etzioni, O. <em>Green AI</em>. Communications of the ACM.</li>
+  </ul>
+
+  <h3>5.3. Declaración de Uso de IA</h3>
+  <div class="callout">
+    El presente trabajo fue desarrollado con la asistencia técnica del asistente de IA en <strong>PyCharm IDE (Gemini 3.8 Flash High)</strong> para la resolución de sintaxis en scripts base, cálculo de métricas de disparidad y tabulación de trade-offs. Toda la información analítica, asignación de severidades y el dictamen de gobernanza fueron revisados, verificados y asumidos íntegramente por el estudiante autor.
+  </div>
+
+</body>
+</html>
