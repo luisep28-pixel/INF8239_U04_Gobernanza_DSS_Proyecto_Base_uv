@@ -1,9 +1,9 @@
-purpose: REPLACE
-assisted_decision: REPLACE
-users: REPLACE
-affected_population: REPLACE
-owner: REPLACE
-non_predictive_alternative: REPLACE
-out_of_scope_use: REPLACE
-withdrawal_condition: REPLACE
-appeal_mechanism: REPLACE
+purpose: Priorizar revisiones territoriales preventivas de riesgo mediante asistencia técnica con supervisión humana obligatoria (Human-in-the-Loop)
+assisted_decision: Clasificación preliminar y orden de prelación para inspecciones presenciales de campo; no autoriza sanciones ni actos administrativos automáticos
+users: Inspectores técnicos territoriales, analistas de gestión de riesgos y directores operativos de la entidad supervisora
+affected_population: Residentes y unidades productivas ubicadas en las zonas territoriales evaluadas, en especial subgrupos vulnerables (G1 y G2)
+owner: Dirección de Gestión Territorial y Comité de Gobernanza de Inteligencia Artificial
+non_predictive_alternative: Asignación por orden cronológico estricto de denuncias (FIFO), muestreo territorial aleatorio simple o listas estáticas basadas en reportes históricos
+out_of_scope_use: Toma de decisiones automáticas sin revisión humana, denegación o revocación autónoma de servicios esenciales, perfilamiento punitivo y vigilancia masiva
+withdrawal_condition: Disparidad de Recall entre subgrupos (recall_gap) superior a 0.16, brecha de FPR superior a 0.16, Recall general inferior a 0.68 o falla crítica en la trazabilidad del modelo
+appeal_mechanism: Procedimiento formal de reclamación ciudadana con revisión humana independiente en un plazo máximo de 10 días hábiles conforme al debido proceso administrativo

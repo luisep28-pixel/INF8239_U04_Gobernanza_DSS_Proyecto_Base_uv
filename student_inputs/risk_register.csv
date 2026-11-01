@@ -1,9 +1,9 @@
 id,scenario,affected,likelihood_1_4,impact_1_4,control,owner,evidence,residual
-R01,REPLACE,REPLACE,2,4,REPLACE,REPLACE,REPLACE,high
-R02,REPLACE,REPLACE,3,3,REPLACE,REPLACE,REPLACE,medium
-R03,REPLACE,REPLACE,2,3,REPLACE,REPLACE,REPLACE,medium
-R04,REPLACE,REPLACE,1,4,REPLACE,REPLACE,REPLACE,medium
-R05,REPLACE,REPLACE,2,2,REPLACE,REPLACE,REPLACE,low
-R06,REPLACE,REPLACE,3,2,REPLACE,REPLACE,REPLACE,medium
-R07,REPLACE,REPLACE,2,4,REPLACE,REPLACE,REPLACE,high
-R08,REPLACE,REPLACE,1,3,REPLACE,REPLACE,REPLACE,low
+R01,"[NIST-GOVERN] Automatización no autorizada de decisiones punitivas sin supervisión humana obligatoria","Población y residentes de zonas evaluadas",2,4,"Protocolo Human-in-the-Loop y restricción técnica en configs/governance.yml","Dirección Institucional y Oficial Legal","Auditoría de logs de ejecución y verificación de compuertas",medium
+R02,"[NIST-MAP] Subregistro y desatención de incidentes críticos en subgrupos vulnerables por sesgo territorial","Comunidades vulnerables de subgrupo G1",3,3,"Mapeo contextual de vulnerabilidad y umbral mínimo de Recall (min_recall >= 0.68)","Product Owner y Analista de Riesgo","Matriz de confusión desagregada y mapeo de stakeholders",medium
+R03,"[NIST-MEASURE] Disparidad de tasas de falsos positivos y recall entre subgrupos demográficos protegidos","Subgrupos poblacionales desfavorecidos (G1 y G2)",2,3,"Auditoría algorítmica continua con Fairlearn y compuertas de max_gap <= 0.16","Lead Data Scientist","Reporte fairness_by_group.csv y matriz interseccional",medium
+R04,"[NIST-MANAGE] Deriva de datos en producción y obsolescencia del modelo sin contingencia","Operadores de inspección y ciudadanía",1,4,"Protocolo de rollback inmediato a línea base heurística según Incident Runbook","ML Engineer y Operaciones","Simulación de incidentes y registro de trazabilidad en CI/CD",low
+R05,"[NIST-GOVERN] Exposición involuntaria de datos personales directos (cédula o nombre)","Titulares de datos personales",2,2,"Contrato estricto de esquema y validación automática de exclusión de PII","Data Engineer","Pruebas unitarias test_data.py y test_privacy.py en pytest",low
+R06,"[NIST-MAP] Sesgo de automatización (automation bias) por sobreconfianza del inspector","Inspectores de campo y auditores",3,2,"Capacitación técnica obligatoria e interfaz con justificación de anulación","Coordinador de Operaciones","Registro de discrepancias manuales y tasa de anulación",low
+R07,"[NIST-MEASURE] Latencia excesiva o huella de carbono elevada por complejidad desmedida","Infraestructura institucional y Green AI",2,4,"Monitoreo de recursos (max_latency_ms <= 500, max_model_kb <= 1024) y modelos lineales","ML Engineer","Métricas de recursos emitidas por fit_measure",low
+R08,"[NIST-MANAGE] Falta de respuesta oportuna o denegación no motivada de apelaciones ciudadanas","Ciudadanos apelantes",1,3,"Canal administrativo formal con plazo máximo de 10 días y revisión técnica colegiada","Comité de Ética y Transparencia","Bitácora de apelaciones y reporte de tiempos de resolución",low

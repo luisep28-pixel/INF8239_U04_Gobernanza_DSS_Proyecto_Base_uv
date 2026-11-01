@@ -1,6 +1,19 @@
-priority_harm: REPLACE
-primary_metric: REPLACE
-tolerance: REPLACE
-evidence: REPLACE
-limitation: REPLACE
-recommendation: REPLACE
+priority_harm: >
+  Falsos negativos en subgrupos protegidos (desatención crítica de riesgos territoriales en comunidades vulnerables G1)
+  y estigmatización por asimetría de falsos positivos (FPR gap).
+primary_metric: >
+  Recall (tasa de verdaderos positivos) desagregado por subgrupo protegido, recall_gap y fpr_gap medidos con Fairlearn.
+tolerance: >
+  Compuertas de gobernanza obligatorias: min_recall >= 0.68, max_recall_gap <= 0.16, max_fpr_gap <= 0.16,
+  latencia <= 500 ms y tamaño del modelo <= 1024 KB.
+evidence: >
+  Auditoría en LAB12: El modelo base logístico presentó un Recall deficiente en G1 (0.653 < 0.68) y una brecha de
+  selección del 23.2%. La mitigación con ThresholdOptimizer (Equalized Odds) elevó el Recall de G1 a 0.898 y redujo la brecha
+  de selección a 4.6%, pero incrementó el fpr_gap a 0.212, evidenciando un trade-off fundamental entre detección y falsas alarmas.
+limitation: >
+  Los datos son sintéticos y didácticos. El optimizador de umbrales genera mayor tasa de falsas alarmas en G1 (FPR = 0.462)
+  que requiere filtrado humano para no saturar las capacidades de inspección de campo.
+recommendation: >
+  LIMITAR: Se autoriza el uso del sistema exclusivamente como herramienta de soporte indicativo con supervisión humana
+  obligatoria (Human-in-the-Loop). Se prohíbe el despliegue autónomo o punitivo. El inspector técnico debe corroborar
+  ocularmente cada caso priorizado y se implementará un muestreo de control del 20% para casos descartados.
