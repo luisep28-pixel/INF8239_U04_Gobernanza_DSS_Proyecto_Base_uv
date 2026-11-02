@@ -8,9 +8,9 @@
     "fpr_gap": 0.125
   },
   "resources": {
-    "training_seconds": 0.04867029999149963,
+    "training_seconds": 0.03519540000706911,
     "model_kb": 3.5634765625,
-    "latency_ms": 0.027258125010121148
+    "latency_ms": 0.10084874993481208
   },
   "decision": {
     "status": "GO",
